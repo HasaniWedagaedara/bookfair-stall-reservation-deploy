@@ -11,7 +11,7 @@ async function bootstrap() {
 
   // Enable CORS for frontend
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'], // Your frontend URL
+    origin: [process.env.FRONTEND_URL || 'http://localhost:3001'], // Your frontend URL
     credentials: true, // Allow cookies
   });
 
