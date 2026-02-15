@@ -47,9 +47,9 @@ export class AuthController {
       .status(201)
       .cookie('jwt', token, {
         httpOnly: true,
-        sameSite: 'lax',
         secure: false,
         maxAge: 1000 * 60 * 60 * 24 * 30,
+        sameSite: 'none',
       })
       .json(user);
   }
