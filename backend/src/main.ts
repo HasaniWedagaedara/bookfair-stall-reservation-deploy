@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as express from 'express';
+import cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,11 +10,15 @@ async function bootstrap() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // Enable CORS for frontend
-  app.enableCors({
-    origin: [process.env.FRONTEND_URL || 'http://localhost:3001'], // Your frontend URL
-    credentials: true, // Allow cookies
-  });
+  app.use(
+  cors({
+    origin: [
+      'https://bookfair-stall-reservation-app.vercel.app',
+      'http://localhost:5173',
+    ],
+    credentials: true,
+  })
+);
 
   // Enable validation
   app.useGlobalPipes(new ValidationPipe());
